@@ -1,77 +1,91 @@
-# Accessibility Coding Standards
+=== Site Kit by Google ===
 
-These are standards that WordPress features should meet for accessibility in order to be merged into core. All new or updated code released in WordPress must conform with the WCAG 2.0 guidelines at level AA. These basic guidelines are intended for easy reference during development, but do not cover all possible accessibility issues.
+Contributors:      google
+Requires at least: 4.7
+Tested up to:      5.4
+Requires PHP:      5.6
+Stable tag:        1.3.1
+License:           Apache License 2.0
+License URI:       https://www.apache.org/licenses/LICENSE-2.0
+Tags:              google, search-console, analytics, adsense, pagespeed-insights, optimize, tag-manager, site-kit
 
-In the [Accessibility Handbook](https://make.wordpress.org/accessibility/handbook/best-practices/) there are pages about best practices, including code examples and resources.
+Site Kit is a one-stop solution for WordPress users to use everything Google has to offer to make them successful on the web.
 
-## HTML Semantics
-Take a pragmatic approach to HTML semantics. Don't add semantics purely for the sake of semantics; but if there is an HTML structure that clearly matches the content, use that element. For example, if you have a group of links, it should most likely use a list element.
+== Description ==
 
-### Heading structure
-The H1 is the main heading representing the page title on every core page. For subsections, use a reasonable HTML heading structure — including the use of heading elements for page subsections. Heading markup should not be used for presentational purposes.
+Site Kit is the official WordPress plugin from Google for insights about how people find and use your site. Site Kit is the one-stop solution to deploy, manage, and get insights from critical Google tools to make the site successful on the web. It provides authoritative, up-to-date insights from multiple Google products directly on the WordPress dashboard for easy access, all for free.
 
-- Use H2 through H6 to give internal structure to the page.
-- Don’t skip heading levels.
-- Don’t add extra functionality inside a heading, like links or buttons.
+= Bringing the best of Google tools to WordPress =
 
-### Semantics for Controls
-Controls with a native keyboard interaction (buttons or links) are always preferred. If there is a valid target link for the control, either an in-page reference or a link, then the control should use an `<a href="{your-valid-target}">`. If there isn't, it should use a `<button>`.
+Site Kit includes powerful features that make using these Google products seamless and flexible:
 
-If you're updating an existing control, button or link decision logic:
-| Scenario | Choice |
-| ---------| ------ |
-| Anchors with null or meaningless HREF values: href='#', no href, href='#something' where #something does not exist | `button` |
-| Anchors with meaningful on-page HREF values href='#something' where #something does existAnchors with meaningful on-page HREF values href='#something' where #something does exist | `button` or `a href='#target'` | 
-| Anchors with meaningful off-page HREF values that are renderable (but actual behavior is AJAX) | Link when JS not available, button the rest of the time. |
-| Anchors with meaningful off-page HREF values that are **not** renderable | Should be a button, but perhaps the target should be made renderable |
-| Buttons that direct to new locations on the same page | Could be either a button or a link. |
-| Buttons that direct to new locations on different pages. | Should be a link. |
+* Easy-to-understand stats directly on your WordPress dashboard
+* Official stats from multiple Google tools, all in one dashboard
+* Quick setup for multiple Google tools without having to edit the source code of your site
+* Metrics for your entire site and for individual posts
+* Easy-to-manage, granular permissions across WordPress and different Google products
 
-### Dynamic Content
-When there are dynamic changes within a page without a page reload you must provide audible feedback with ARIA for important changes, like a successful save event, for example.
+= Supported Google tools =
 
-Use `wp.a11y.speak()` for all simple AJAX responses. If you are doing a complex interaction, `wp.a11y.speak()` may not be the best choice. In that case, discuss your usage with the Accessibility team to determine whether extending `wp.a11y.speak()` or coding your own ARIA live regions is the best choice.
+Site Kit shows key metrics and insights from different Google products:
 
-- [Let WordPress Speak: introduction to `wp.a11y.speak()`](https://make.wordpress.org/accessibility/2015/04/15/let-wordpress-speak-new-in-wordpress-4-2/)
-- [Mozilla developer documentation on ARIA Live Regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions)
+* **Search Console:** Understand how Google Search discovers and displays your pages in Google Search. Track how many people saw your site in Search results, and what query they used to search for your site.
+* **Analytics:** Explore how users navigate your site and track goals you've set up for your users to complete.
+* **AdSense:** Keep track of how much your site is earning you.
+* **PageSpeed Insights:** See how your pages perform compared to other real-world sites. Improve performance with actionable tips from PageSpeed Insights.
+* **Tag Manager:** Use Site Kit to easily set up Tag Manager- no code editing required. Then, manage your tags in Tag Manager.
+* **Optimize:** Use Site Kit to easily set up Optimize- no code editing required. Then, set up A/B tests in Optimize.
 
-## Color Contrast
-In most cases, feature plug-ins are not expected to add or modify colors in core. However, if a feature plug-in needs to add new color combinations, those combinations must meet minimum contrast requirements. Minimum contrast requirements are 4.5:1 for font sizes rendering smaller than 24px or smaller and 3.0:1 for font sizes larger than 24px or 19px and bold.
+== Installation ==
+**Note**: Make sure that your website is live. If your website isn't live yet, Site Kit can't show you any data. 
+However, if you have a staging environment in addition to your production site, Site Kit can display data from your production site in the staging environment. Learn how to use [Site Kit with a staging environment] (https://sitekit.withgoogle.com/documentation/using-site-kit-on-a-staging-environment/).
 
-- [WordPress Accessibility Quick Start: Color Contrast](https://make.wordpress.org/accessibility/handbook/quick-start-guide/#color-contrast)
+= Installation from within WordPress =
 
-## Links: underline or no underline?
-When links can be identified as such by the context, for example because they're part of a menu, or a set of links clearly identified as user interface controls, they don't necessarily need to be underlined. In all the other cases, especially for links surrounded by other text (in a line or block of text), links need to be always underlined.
+1. Visit **Plugins > Add New**.
+2. Search for **Site Kit by Google**.
+3. Install and activate the Site Kit by Google plugin.
+4. Connect Site Kit to your Google account. If there are multiple WordPress admins, keep in mind that each admin must connect their own Google account in order to access the plugin.
 
-## Keyboard Accessibility
-Users must be able to reach and successfully interact with all elements on the page that are actionable, including all form inputs, buttons and links by using the keyboard. They must be able to see a visual indicator of keyboard focus. You should be aware that keyboard events may operate differently when a screen reader is running.
 
-If you can complete an action with a mouse, you must also be able to complete that action using the keyboard.
+= Manual installation =
 
-## Images and Icons
-Any image resource must include an accessible name. In some cases, the accessible name should be an empty string. An image can be represented by an actual `<img>` element, an icon font, or an svg element; but any graphical representation is considered an image for these purposes. Different types of elements use different types of accessible names.
+1. Upload the entire `google-site-kit` folder to the `/wp-content/plugins/` directory.
+2. Visit **Plugins**.
+3. Activate the Site Kit by Google plugin.
+4. Connect Site Kit to your Google account. If there are multiple WordPress admins, keep in mind that each admin must connect their own Google account in order to access the plugin.
 
-For `<img>` elements, the accessible name should be in the alt attribute. If the img is ornamental, the alt attribute should still be included, but left empty.
+= After activation =
 
-For icon fonts, the font icon itself should have the aria-hidden attribute, with screen-reader-text in a neighbor element. If the icon is ornamental, the font icon should still have the `aria-hidden` attribute, but the screen reader text should be omitted.
+1. Visit the new **Site Kit** menu.
+2. Follow the instructions in the setup flow.
+3. Go to the main Site Kit dashboard which already displays key metrics from Search Console.
+4. Connect additional Google tools under **Site Kit > Settings**. Learn more about [which tools are right for you](https://sitekit.withgoogle.com/documentation/choose-tools/).
 
-```html
-<a href="this.html">
-<span class="dashicons dashicon-thumbs-up" aria-hidden="true"></span>
-<span class="screen-reader-text">Something</span>
-</a>
-```
+== Frequently Asked Questions ==
 
-For SVG, the SVG should be inline, so that accessible information isn't hidden from assistive technology. SVG elements should contain a `<title>` element with the accessible name of the image. For cross-technology support, the title element should be associated with the svg element via `aria-labelledby`. For maximum compatibility, all SVG elements used to represent an image should carry the role attribute with a value of 'img'.
+For more information, visit the [official Site Kit website](https://sitekit.withgoogle.com/documentation/).
 
-If the SVG element is ornamental, then the title element should be omitted and no aria-labelledby attribute should be present. The SVG element should also carry the `aria-hidden` attribute.
+= Where should I submit my support request? =
 
-- [More information on SVG Accessibility](http://www.sitepoint.com/tips-accessible-svg/)
+First, check our [troubleshooting guide](https://sitekit.withgoogle.com/documentation/fix-common-issues/). If you're still experiencing issues, use the [wordpress.org support forums](https://wordpress.org/support/plugin/google-site-kit). If you have a technical issue with the plugin where you already have more insight on how to fix it, you can also [open an issue on GitHub instead](https://github.com/google/site-kit-wp/issues).
 
-## Labeling
+= Is Site Kit free? =
 
-Existing code uses a mixture of explicitly and implicitly labeled fields, but all new code must use an explicitly associated `<label>` element (using for/id attributes and _not_ wrapping the form control). Labels are not required to be visible, but must use the .screen-reader-text class when hidden. Placeholders are fine, but are not a substitute for labels. For all labels, clicking on the field label should cause the associated field to receive focus or, for checkboxes and radio selectors, select that choice.
+The Site Kit plugin is free and open source, and will remain so. Individual Google products included in Site Kit are subject to standard terms and fees (if any) for those products.
 
-Don't introduce new title attributes to convey information. Use aria-label when you need to provide an alternate label and `.screen-reader-text` if you're appending additional data.
+= What happens if I already use another plugin to integrate one or more Google products? =
 
-When creating forms, use `<fieldset>` and `<legend>` to group logically related form elements inside complex forms or to group radio buttons and checkboxes under a heading.
+We're happy to hear that and you can continue using it if it meets your needs. You can also install Site Kit alongside to gain access to other insights and integrations.
+
+= Will Google offer more tools through Site Kit? =
+
+We plan to expand the plugin’s capabilities and integrations in the future; we’d love to get your feedback on which products and features we should prioritize.
+
+= How can I contribute to the plugin? =
+
+If you have some ideas to improve the plugin or to solve a bug, feel free to raise an issue or submit a pull request in the [GitHub repository for the plugin](https://github.com/google/site-kit-wp). Please stick to the [contributing guidelines](https://github.com/google/site-kit-wp/blob/master/CONTRIBUTING.md). You can also contribute to the plugin by translating it. Simply visit [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-site-kit) to get started.
+
+== Changelog ==
+
+For the plugin's changelog, please see [the Releases page on GitHub](https://github.com/google/site-kit-wp/releases).
